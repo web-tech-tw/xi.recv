@@ -6,16 +6,16 @@ package Models
 
 type Message struct{}
 
-func NewMessage() Model {
+func NewMessage() ModelInterface {
 	instance := new(Message)
 	return instance
 }
 
-func (m Message) load() Model {
+func (m Message) load() ModelInterface {
 	return m
 }
 
-func (m Message) reload() Model {
+func (m Message) reload() ModelInterface {
 	return m
 }
 

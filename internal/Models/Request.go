@@ -6,16 +6,16 @@ package Models
 
 type Request struct{}
 
-func NewRequest() Model {
+func NewRequest() ModelInterface {
 	instance := new(Request)
 	return instance
 }
 
-func (r Request) load() Model {
+func (r Request) load() ModelInterface {
 	return r
 }
 
-func (r Request) reload() Model {
+func (r Request) reload() ModelInterface {
 	return r
 }
 

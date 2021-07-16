@@ -6,16 +6,16 @@ package Models
 
 type User struct{}
 
-func NewUser() Model {
+func NewUser() ModelInterface {
 	instance := new(User)
 	return instance
 }
 
-func (u User) load() Model {
+func (u User) load() ModelInterface {
 	return u
 }
 
-func (u User) reload() Model {
+func (u User) reload() ModelInterface {
 	return u
 }
 

@@ -3,3 +3,7 @@
 // (c) 2021 Star Inc. and its contributors.
 
 package Controllers
+
+type Interface interface {
+	Trigger()
+}

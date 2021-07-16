@@ -4,9 +4,9 @@
 
 package Models
 
-type Model interface {
-	load() Model
-	reload() Model
+type ModelInterface interface {
+	load() ModelInterface
+	reload() ModelInterface
 	create() bool
 	update() bool
 	destroy() bool
