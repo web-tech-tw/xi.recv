@@ -1,4 +1,4 @@
-module github.com/star-inc/xi-recv
+module github.com/star-inc/xi.recv
 
 go 1.16
 
