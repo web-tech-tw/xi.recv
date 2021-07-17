@@ -1,7 +1,7 @@
 package Config
 
 const (
-	RedisAddr     = ""
-	RedisPassword = ""
-	RedisDB       = ""
+	RedisAddr     = "XI_REDIS_ADDR"
+	RedisPassword = "XI_REDIS_PW"
+	RedisDB       = "XI_REDIS_DB"
 )

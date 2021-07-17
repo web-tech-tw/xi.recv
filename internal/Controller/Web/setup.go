@@ -2,12 +2,12 @@ package Web
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/star-inc/xi.recv/internal/Controllers"
+	"github.com/star-inc/xi.recv/internal/Controller"
 )
 
 type Web struct{}
 
-func NewWeb() Controllers.Interface {
+func NewWeb() Controller.Interface {
 	instance := new(Web)
 	return instance
 }

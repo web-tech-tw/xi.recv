@@ -1,15 +1,14 @@
 // xi.recv: The opensource direct message service for LINE OpenChat (LINE Square).
 // License: Apache License 2.0
 // (c) 2021 Star Inc. and its contributors.
-
 package main
 
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/star-inc/xi.recv/internal/Controllers"
-	"github.com/star-inc/xi.recv/internal/Controllers/Bot"
-	"github.com/star-inc/xi.recv/internal/Controllers/Web"
+	"github.com/star-inc/xi.recv/internal/Controller"
+	"github.com/star-inc/xi.recv/internal/Controller/Bot"
+	"github.com/star-inc/xi.recv/internal/Controller/Web"
 	"log"
 )
 
@@ -36,8 +35,8 @@ func main() {
 		})
 	})
 	// Triggers
-	preload := []func() Controllers.Interface{Bot.NewBot, Web.NewWeb}
-	var controllers []Controllers.Interface
+	preload := []func() Controller.Interface{Bot.NewBot, Web.NewWeb}
+	var controllers []Controller.Interface
 	for _, controller := range preload {
 		instance := controller()
 		controllers = append(controllers, instance)
