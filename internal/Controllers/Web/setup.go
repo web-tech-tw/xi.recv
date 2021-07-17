@@ -1,6 +1,7 @@
 package Web
 
 import (
+	"github.com/gin-gonic/gin"
 	"github.com/star-inc/xi.recv/internal/Controllers"
 )
 
@@ -11,5 +12,9 @@ func NewWeb() Controllers.Interface {
 	return instance
 }
 
-func (w Web) Trigger() {
+func (w Web) RouterSetup(router *gin.Engine) {
+	router.POST("/user")
+	router.POST("/room")
+	router.POST("/request")
+	router.POST("/message")
 }

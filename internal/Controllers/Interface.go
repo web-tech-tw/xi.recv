@@ -4,6 +4,8 @@
 
 package Controllers
 
+import "github.com/gin-gonic/gin"
+
 type Interface interface {
-	Trigger()
+	RouterSetup(router *gin.Engine)
 }

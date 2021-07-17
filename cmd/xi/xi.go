@@ -41,7 +41,7 @@ func main() {
 	for _, controller := range preload {
 		instance := controller()
 		controllers = append(controllers, instance)
-		instance.Trigger()
+		instance.RouterSetup(router)
 	}
 	// Execute
 	log.Println("Start")
