@@ -4,29 +4,38 @@
 
 package Models
 
-type User struct{}
+import (
+	"github.com/docker/docker/pkg/namesgenerator"
+)
 
-func NewUser() ModelInterface {
+type User struct {
+	UserID      string
+	RequestCode string
+}
+
+func NewUser(UserID string) ModelInterface {
 	instance := new(User)
+	instance.UserID = UserID
+	instance.RequestCode = namesgenerator.GetRandomName(0)
 	return instance
 }
 
-func (u User) load() ModelInterface {
-	return u
+func (u User) Load(filter interface{}) error {
+	return nil
 }
 
-func (u User) reload() ModelInterface {
-	return u
+func (u User) Reload() error {
+	return nil
 }
 
-func (u User) create() bool {
-	return false
+func (u User) Create() error {
+	return nil
 }
 
-func (u User) update() bool {
-	return false
+func (u User) Update() error {
+	return nil
 }
 
-func (u User) destroy() bool {
-	return false
+func (u User) Destroy() error {
+	return nil
 }

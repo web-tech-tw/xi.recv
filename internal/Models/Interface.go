@@ -5,9 +5,9 @@
 package Models
 
 type ModelInterface interface {
-	load() ModelInterface
-	reload() ModelInterface
-	create() bool
-	update() bool
-	destroy() bool
+	Load(filter interface{}) error
+	Reload() error
+	Create() error
+	Update() error
+	Destroy() error
 }

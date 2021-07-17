@@ -4,29 +4,46 @@
 
 package Models
 
-type Request struct{}
+import (
+	"crypto/sha256"
+	"fmt"
+	"strings"
+	"time"
+)
 
-func NewRequest() ModelInterface {
+type Request struct {
+	HashId      string
+	From        *User
+	To          *Room
+	CreatedTime int64
+}
+
+func NewRequest(from *User, to *Room) ModelInterface {
 	instance := new(Request)
+	sha256Sum := sha256.Sum256([]byte(strings.Join([]string{from.UserID, to.UUID}, "\x1e")))
+	instance.HashId = fmt.Sprintf("%x", sha256Sum)
+	instance.From = from
+	instance.To = to
+	instance.CreatedTime = time.Now().Unix()
 	return instance
 }
 
-func (r Request) load() ModelInterface {
-	return r
+func (r Request) Load(filter interface{}) error {
+	return nil
 }
 
-func (r Request) reload() ModelInterface {
-	return r
+func (r Request) Reload() error {
+	return r.Load(r.HashId)
 }
 
-func (r Request) create() bool {
-	return false
+func (r Request) Create() error {
+	return nil
 }
 
-func (r Request) update() bool {
-	return false
+func (r Request) Update() error {
+	return nil
 }
 
-func (r Request) destroy() bool {
-	return false
+func (r Request) Destroy() error {
+	return nil
 }
