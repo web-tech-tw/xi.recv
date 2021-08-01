@@ -6,13 +6,11 @@ import (
 	"github.com/star-inc/xi.recv/internal/Controller"
 	"github.com/star-inc/xi.recv/internal/Controller/Bot/Message"
 	"github.com/star-inc/xi.recv/internal/Kernel/Config"
-	"github.com/star-inc/xi.recv/internal/Model"
 	"os"
 )
 
 type Bot struct {
 	Client *linebot.Client
-	User   *Model.User
 }
 
 func NewBot() Controller.Interface {

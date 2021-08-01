@@ -17,7 +17,7 @@ type Request struct {
 	CreatedTime int64
 }
 
-func NewRequest(from *User, to *Room) ModelInterface {
+func NewRequest(from *User, to *Room) Interface {
 	instance := new(Request)
 	sha256Sum := sha256.Sum256([]byte(strings.Join([]string{from.UserID, to.UUID}, "\x1e")))
 	instance.HashId = fmt.Sprintf("%x", sha256Sum)
@@ -27,22 +27,22 @@ func NewRequest(from *User, to *Room) ModelInterface {
 	return instance
 }
 
-func (r Request) Load(filter interface{}) error {
+func (r *Request) Load(filter interface{}) error {
 	return nil
 }
 
-func (r Request) Reload() error {
+func (r *Request) Reload() error {
 	return r.Load(r.HashId)
 }
 
-func (r Request) Create() error {
+func (r *Request) Create() error {
 	return nil
 }
 
-func (r Request) Update() error {
+func (r *Request) Update() error {
 	return nil
 }
 
-func (r Request) Destroy() error {
+func (r *Request) Destroy() error {
 	return nil
 }

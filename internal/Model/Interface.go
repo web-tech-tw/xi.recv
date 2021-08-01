@@ -3,7 +3,7 @@
 // (c) 2021 Star Inc. and its contributors.
 package Model
 
-type ModelInterface interface {
+type Interface interface {
 	Load(filter interface{}) error
 	Reload() error
 	Create() error

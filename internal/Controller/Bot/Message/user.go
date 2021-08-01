@@ -7,13 +7,14 @@ import (
 )
 
 func UserHandler(b Bot.Bot, event *linebot.Event) {
+	user := Model.NewUser(event.Source.UserID)
 	if event.Message.Type() != linebot.MessageTypeText {
 		return
 	}
 	textMessage := event.Message.(*linebot.TextMessage)
 	switch textMessage.Text {
 	case "issue":
-		room := Model.NewRoom(b.User).(*Model.Room)
+		room := Model.NewRoom(user.(*Model.User)).(*Model.Room)
 		b.Client.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(room.UUID))
 	}
 }

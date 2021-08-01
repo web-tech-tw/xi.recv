@@ -8,7 +8,7 @@ type Room struct {
 	Requests []*Request
 }
 
-func NewRoom(creator *User) ModelInterface {
+func NewRoom(creator *User) Interface {
 	instance := new(Room)
 	instance.UUID = uuid.New().String()
 	instance.Creator = creator
@@ -16,22 +16,22 @@ func NewRoom(creator *User) ModelInterface {
 	return instance
 }
 
-func (r Room) Load(filter interface{}) error {
+func (r *Room) Load(filter interface{}) error {
 	return nil
 }
 
-func (r Room) Reload() error {
+func (r *Room) Reload() error {
 	return r.Load(r.UUID)
 }
 
-func (r Room) Create() error {
+func (r *Room) Create() error {
 	return nil
 }
 
-func (r Room) Update() error {
+func (r *Room) Update() error {
 	return nil
 }
 
-func (r Room) Destroy() error {
+func (r *Room) Destroy() error {
 	return nil
 }

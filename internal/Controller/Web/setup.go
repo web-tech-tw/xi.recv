@@ -13,6 +13,7 @@ func NewWeb() Controller.Interface {
 }
 
 func (w Web) RouterSetup(router *gin.Engine) {
+	router.Use(Access)
 	router.POST("/user")
 	router.POST("/room")
 	router.POST("/request")

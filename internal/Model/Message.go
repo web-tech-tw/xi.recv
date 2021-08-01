@@ -18,7 +18,7 @@ type Message struct {
 	Text   string
 }
 
-func NewMessage(from *User, to *Room, text string) ModelInterface {
+func NewMessage(from *User, to *Room, text string) Interface {
 	instance := new(Message)
 	instance.UUID = uuid.New().String()
 	instance.From = from

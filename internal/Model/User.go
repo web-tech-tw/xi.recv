@@ -4,37 +4,51 @@
 package Model
 
 import (
+	"context"
+	"encoding/json"
 	"github.com/docker/docker/pkg/namesgenerator"
+	"github.com/go-redis/redis/v8"
 )
 
 type User struct {
+	source      *redis.Client
 	UserID      string
 	RequestCode string
 }
 
-func NewUser(UserID string) ModelInterface {
+func NewUser(UserID string) Interface {
 	instance := new(User)
 	instance.UserID = UserID
 	instance.RequestCode = namesgenerator.GetRandomName(0)
 	return instance
 }
 
-func (u User) Load(filter interface{}) error {
+func (u *User) Load(filter interface{}) error {
+	ctx := context.Background()
+	values := u.source.Get(ctx, filter.(string))
+	data, err := values.Bytes()
+	if err != nil {
+		return err
+	}
+	err = json.Unmarshal(data, u)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
-func (u User) Reload() error {
+func (u *User) Reload() error {
+	return u.Load(u.UserID)
+}
+
+func (u *User) Create() error {
 	return nil
 }
 
-func (u User) Create() error {
+func (u *User) Update() error {
 	return nil
 }
 
-func (u User) Update() error {
-	return nil
-}
-
-func (u User) Destroy() error {
+func (u *User) Destroy() error {
 	return nil
 }
