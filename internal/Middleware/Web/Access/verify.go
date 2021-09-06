@@ -1,11 +1,12 @@
-// xi.recv: The opensource direct message service for LINE OpenChat (LINE Square).
+// xi.recv - The opensource direct message service for LINE OpenChat (LINE Square).
 // License: Apache License 2.0
 // (c) 2021 Star Inc. and its contributors.
-package Web
+
+package Access
 
 import (
 	"encoding/json"
-	"github.com/star-inc/xi.recv/internal/Kernel/Config"
+	"github.com/star-inc/xi.recv/internal/Config"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -13,7 +14,9 @@ import (
 	"os"
 )
 
-func checkFromLINE(idToken string) (int, interface{}) {
+// getProfileFromLINE - receive user information from LINE Login API by ID Token.
+// https://developers.line.biz/en/docs/liff/using-user-profile/#sending-id-token
+func getProfileFromLINE(idToken string) (int, interface{}) {
 	var err error
 	var result interface{}
 	client := http.Client{}
@@ -45,6 +48,8 @@ func checkFromLINE(idToken string) (int, interface{}) {
 	return response.StatusCode, json.Unmarshal(body, result)
 }
 
+// successResponse - the struct from LINE with user information.
+// https://developers.line.biz/en/reference/line-login/#verify-id-token-response
 type successResponse struct {
 	Iss     string `json:"iss"`
 	Sub     string `json:"sub"`
@@ -58,6 +63,8 @@ type successResponse struct {
 	Email   string `json:"email"`
 }
 
+// errorResponse - the struct from LINE if there is an error thrown.
+// https://developers.line.biz/en/reference/line-login/#verify-id-token-error-response
 type errorResponse struct {
 	Error            string `json:"error"`
 	ErrorDescription string `json:"error_description"`

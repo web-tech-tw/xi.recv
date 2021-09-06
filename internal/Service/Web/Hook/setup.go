@@ -1,11 +1,15 @@
-package Bot
+// xi.recv - The opensource direct message service for LINE OpenChat (LINE Square).
+// License: Apache License 2.0
+// (c) 2021 Star Inc. and its contributors.
+
+package Hook
 
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/line/line-bot-sdk-go/v7/linebot"
-	"github.com/star-inc/xi.recv/internal/Controller"
-	"github.com/star-inc/xi.recv/internal/Controller/Bot/Message"
-	"github.com/star-inc/xi.recv/internal/Kernel/Config"
+	"github.com/star-inc/xi.recv/internal"
+	"github.com/star-inc/xi.recv/internal/Config"
+	"github.com/star-inc/xi.recv/internal/Service/Web/Active"
 	"os"
 )
 
@@ -13,7 +17,7 @@ type Bot struct {
 	Client *linebot.Client
 }
 
-func NewBot() Controller.Interface {
+func NewBot() internal.Router {
 	instance := new(Bot)
 	var err error
 	instance.Client, err = linebot.New(
@@ -49,7 +53,7 @@ func (b Bot) eventHandler(events []*linebot.Event) {
 func (b Bot) messageHandler(event *linebot.Event) {
 	switch event.Source.Type {
 	case linebot.EventSourceTypeUser:
-		Message.UserHandler(b, event)
+		Active.UserHandler(b, event)
 		break
 	case linebot.EventSourceTypeGroup:
 		b.Client.LeaveGroup(event.Source.GroupID)
