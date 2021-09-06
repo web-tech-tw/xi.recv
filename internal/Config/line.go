@@ -5,7 +5,7 @@
 package Config
 
 const (
-	LineChannelID = "XI_LINE_CHANNEL_ID"
-	LineSecret    = "XI_LINE_SECRET"
-	LineToken     = "XI_LINE_TOKEN"
+	EnvLineChannelID = "XI_LINE_CHANNEL_ID"
+	EnvLineSecret    = "XI_LINE_SECRET"
+	EnvLineToken     = "XI_LINE_TOKEN"
 )

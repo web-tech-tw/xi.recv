@@ -5,10 +5,10 @@
 package talk
 
 import (
+	"github.com/star-inc/xi.recv/internal/Config"
 	"gopkg.in/rethinkdb/rethinkdb-go.v6"
 	KernelSource "gopkg.in/star-inc/kaguyakernel.v2/source"
 	"log"
-	"os"
 )
 
 var (
@@ -18,7 +18,7 @@ var (
 
 func init() {
 	source, err := KernelSource.NewContainerSource(
-		rethinkdb.ConnectOpts{Address: os.Getenv("RETHINKDB_ADDR")},
+		rethinkdb.ConnectOpts{Address: Config.RethinkdbAddr},
 		"message",
 	)
 	if err != nil {
@@ -29,7 +29,7 @@ func init() {
 
 func init() {
 	source, err := KernelSource.NewMessageboxSource(
-		rethinkdb.ConnectOpts{Address: os.Getenv("RETHINKDB_ADDR")},
+		rethinkdb.ConnectOpts{Address: Config.RethinkdbAddr},
 		"messagebox",
 	)
 	if err != nil {

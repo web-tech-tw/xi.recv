@@ -11,7 +11,6 @@ import (
 	"log"
 	"net/http"
 	"net/url"
-	"os"
 )
 
 // getProfileFromLINE - receive user information from LINE Login API by ID Token.
@@ -21,7 +20,7 @@ func getProfileFromLINE(idToken string) (int, interface{}) {
 	var result interface{}
 	client := http.Client{}
 	formValues := url.Values{
-		"client_id": {os.Getenv(Config.LineChannelID)},
+		"client_id": {Config.LineChannelID},
 		"id_token":  {idToken},
 	}
 	response, err := client.PostForm(

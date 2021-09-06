@@ -10,7 +10,6 @@ import (
 	"github.com/star-inc/xi.recv/internal"
 	"github.com/star-inc/xi.recv/internal/Config"
 	"github.com/star-inc/xi.recv/internal/Service/Web/Active"
-	"os"
 )
 
 type Bot struct {
@@ -21,8 +20,8 @@ func NewBot() internal.Router {
 	instance := new(Bot)
 	var err error
 	instance.Client, err = linebot.New(
-		os.Getenv(Config.LineSecret),
-		os.Getenv(Config.LineToken),
+		Config.LineSecret,
+		Config.LineToken,
 	)
 	if err != nil {
 		panic(err)
