@@ -4,10 +4,12 @@
 
 package Data
 
+import KernelSource "gopkg.in/star-inc/kaguyakernel.v2/source"
+
 type Interface interface {
-	Load(filter interface{}) error
-	Reload() error
-	Create() error
-	Update() error
-	Destroy() error
+	Load(source KernelSource.Interface, filter interface{}) error
+	Reload(source KernelSource.Interface) error
+	Create(source KernelSource.Interface) error
+	Update(source KernelSource.Interface) error
+	Destroy(source KernelSource.Interface) error
 }

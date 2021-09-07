@@ -5,14 +5,12 @@
 package Data
 
 import (
-	"context"
-	"encoding/json"
 	"github.com/docker/docker/pkg/namesgenerator"
-	"github.com/go-redis/redis/v8"
+	XISource "github.com/star-inc/xi.recv/internal/Source"
+	KernelSource "gopkg.in/star-inc/kaguyakernel.v2/source"
 )
 
 type User struct {
-	source      *redis.Client
 	UserID      string
 	RequestCode string
 }
@@ -24,32 +22,25 @@ func NewUser(UserID string) Interface {
 	return instance
 }
 
-func (u *User) Load(filter interface{}) error {
-	ctx := context.Background()
-	values := u.source.Get(ctx, filter.(string))
-	data, err := values.Bytes()
-	if err != nil {
-		return err
-	}
-	err = json.Unmarshal(data, u)
-	if err != nil {
-		return err
-	}
+func (u *User) Load(_ KernelSource.Interface, filter interface{}) error {
 	return nil
 }
 
-func (u *User) Reload() error {
-	return u.Load(u.UserID)
+func (u *User) Reload(source KernelSource.Interface) error {
+	return u.Load(source, u.UserID)
 }
 
-func (u *User) Create() error {
-	return nil
+func (u *User) Create(source KernelSource.Interface) error {
+	sourceInstance := source.(*XISource.UserSource)
+	return source.GetTerm().Table(sourceInstance.RelationID).Insert(u).Exec(source.GetSession())
 }
 
-func (u *User) Update() error {
-	return nil
+func (u *User) Update(source KernelSource.Interface) error {
+	sourceInstance := source.(*XISource.UserSource)
+	return source.GetTerm().Table(sourceInstance.RelationID).Replace(u).Exec(source.GetSession())
 }
 
-func (u *User) Destroy() error {
-	return nil
+func (u *User) Destroy(source KernelSource.Interface) error {
+	sourceInstance := source.(*XISource.UserSource)
+	return source.GetTerm().Table(sourceInstance.ClientID).Get(u.Target).Delete().Exec(source.GetSession())
 }
